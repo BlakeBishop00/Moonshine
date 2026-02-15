@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 3377666901986503641}
   - component: {fileID: 3026837458121997827}
   - component: {fileID: 5596339852198160958}
-  - component: {fileID: 5037177774508821990}
-  - component: {fileID: 7830311884592836445}
   m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -96,83 +94,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2772897098745507255}
   m_Enabled: 1
---- !u!114 &5037177774508821990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2772897098745507255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Postprocessing.Runtime::UnityEngine.Rendering.PostProcessing.PostProcessLayer
-  volumeTrigger: {fileID: 3377666901986503641}
-  volumeLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  stopNaNPropagation: 1
-  finalBlitToCameraTarget: 0
-  antialiasingMode: 0
-  temporalAntialiasing:
-    jitterSpread: 0.75
-    sharpness: 0.25
-    stationaryBlending: 0.95
-    motionBlending: 0.85
-  subpixelMorphologicalAntialiasing:
-    quality: 2
-  fastApproximateAntialiasing:
-    fastMode: 0
-    keepAlpha: 0
-  fog:
-    enabled: 1
-    excludeSkybox: 1
-  debugLayer:
-    lightMeter:
-      width: 512
-      height: 256
-      showCurves: 1
-    histogram:
-      width: 512
-      height: 256
-      channel: 3
-    waveform:
-      exposure: 0.12
-      height: 256
-    vectorscope:
-      size: 256
-      exposure: 0.12
-    overlaySettings:
-      linearDepth: 0
-      motionColorIntensity: 4
-      motionGridSize: 64
-      colorBlindnessType: 0
-      colorBlindnessStrength: 1
-  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
-  m_ShowCustomSorter: 0
-  breakBeforeColorGrading: 0
-  m_BeforeTransparentBundles: []
-  m_BeforeStackBundles: []
-  m_AfterStackBundles: []
---- !u!114 &7830311884592836445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2772897098745507255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Postprocessing.Runtime::UnityEngine.Rendering.PostProcessing.PostProcessVolume
-  sharedProfile: {fileID: 11400000, guid: 3133519874064974ba41feae36e98383, type: 2}
-  isGlobal: 1
-  blendDistance: 0
-  weight: 1
-  priority: 0
 --- !u!1 &6536560034209768490
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +105,8 @@ GameObject:
   - component: {fileID: 4941171389965024992}
   - component: {fileID: 5719007719807198477}
   - component: {fileID: 2781036462236222688}
-  m_Layer: 6
+  - component: {fileID: 1539544173203904373}
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -229,8 +151,8 @@ CharacterController:
   serializedVersion: 3
   m_Height: 1.75
   m_Radius: 0.3
-  m_SlopeLimit: 90
-  m_StepOffset: 1.2
+  m_SlopeLimit: 60
+  m_StepOffset: 0.2
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -264,6 +186,27 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 1
+--- !u!114 &1539544173203904373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6536560034209768490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed1b523ae268074785a23183a6f1f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhysicsPickup
+  pickupLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  _pickupRange: 6
+  _holdDistance: 2
+  _moveForce: 500
+  _rotateSpeed: 50
+  _throwForce: 20
+  _linearDampening: 10
 --- !u!1 &6989699088278253554
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +434,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1977008976944210792}
-  - component: {fileID: 7603988380846149547}
   m_Layer: 6
   m_Name: Water Bucket
   m_TagString: Untagged
@@ -515,24 +457,6 @@ Transform:
   - {fileID: 891343686571742059}
   m_Father: {fileID: 3377666901986503641}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7603988380846149547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8741914385112175308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fc428d8bbe490e4aa29d2de2224b2f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WaterBucket
-  heightIncreaseAmount: 0.5
-  pourLitersPerClick: 8
-  toggleAction: {fileID: -1673650798264512725, guid: 289c1b55c9541489481df5cc06664110, type: 3}
-  pourAction: {fileID: 0}
-  simulation: {fileID: 0}
-  bucketVisual: {fileID: 7672136183591114481}
 --- !u!1 &9003483201946667327
 GameObject:
   m_ObjectHideFlags: 0
