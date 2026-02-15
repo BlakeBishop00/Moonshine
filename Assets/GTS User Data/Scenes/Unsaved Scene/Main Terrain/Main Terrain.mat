@@ -1,0 +1,164 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Main Terrain
+  m_Shader: {fileID: 4800000, guid: 40fdfe8908e900e419159e160fbdeb87, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _DETAIL_NORMALS_ON
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlbedoArray:
+        m_Texture: {fileID: 18700000, guid: 1371a262c062a424b97ea0243151b2a5, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColormapNormalTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColormapTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Control0:
+        m_Texture: {fileID: 2800000, guid: f572a2491e198bb4fa106cc9d73ee04a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Control1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormal:
+        m_Texture: {fileID: 2800000, guid: c0a80725d58eb0a49852fa15fc934925, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GeoMap:
+        m_Texture: {fileID: 2800000, guid: 4504b46c384e3824abb34e3ac5fb4be1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GeoNormal:
+        m_Texture: {fileID: 2800000, guid: 1193394813603ae4fa126ba777b9a9e0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MacroVariationMap:
+        m_Texture: {fileID: 2800000, guid: 2f6179c152f56b048958dd7dc649cb41, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalArray:
+        m_Texture: {fileID: 18700000, guid: 30641b8b132aae143858ce7cfe70ac67, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SplatmapIndex:
+        m_Texture: {fileID: 2800000, guid: fee5a71ccc4df944cbec3678b26d383e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SplatmapIndexLowRes:
+        m_Texture: {fileID: 2800000, guid: ab898f8c110f07b4d91160828b94c939, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WorldNormalMap:
+        m_Texture: {fileID: 2800000, guid: d444886c8aea29a4282faf9d246d791f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BlendFactor: 0.11800001
+    - _COLORMAP: 0
+    - _DETAIL_NORMALS: 1
+    - _GEOLOGICAL: 0
+    - _HEIGHT_BLEND: 0
+    - _MACRO_VARIATION_ON: 0
+    - _MOBILE_VR_ON: 0
+    - _RAIN: 0
+    - _Resolution: 513
+    - _SNOW: 0
+    - _TESSELLATION: 0
+    - _TessellationMultiplier: 1
+    - _WorldAlignedUVs: 1
+    m_Colors:
+    - _Color0: {r: 1, g: 1, b: 1, a: 1}
+    - _Color1: {r: 1, g: 1, b: 1, a: 1}
+    - _Color2: {r: 1, g: 1, b: 1, a: 1}
+    - _Color3: {r: 1, g: 1, b: 1, a: 1}
+    - _Color4: {r: 1, g: 1, b: 1, a: 1}
+    - _Color5: {r: 1, g: 1, b: 1, a: 1}
+    - _Color6: {r: 1, g: 1, b: 1, a: 1}
+    - _Color7: {r: 1, g: 1, b: 1, a: 1}
+    - _ColormapDataA: {r: 1, g: 1, b: 1, a: 1}
+    - _ColormapNearFarData: {r: 1, g: 1, b: 1, a: 1}
+    - _DetailNearFarData: {r: 100, g: 0.6, b: 1000, a: 0.8}
+    - _DisplacementData0: {r: 0.1, g: 0.1, b: 0, a: 25}
+    - _DisplacementData1: {r: 0.1, g: 0.1, b: 0, a: 25}
+    - _DisplacementData2: {r: 1, g: 1, b: 1, a: 1}
+    - _DisplacementData3: {r: 1, g: 1, b: 1, a: 1}
+    - _DisplacementData4: {r: 1, g: 1, b: 1, a: 1}
+    - _DisplacementData5: {r: 1, g: 1, b: 1, a: 1}
+    - _DisplacementData6: {r: 1, g: 1, b: 1, a: 1}
+    - _DisplacementData7: {r: 1, g: 1, b: 1, a: 1}
+    - _GeoFarData: {r: 0.2, g: 200, b: 0, a: 0.5}
+    - _GeoLayerData0: {r: 1, g: 1, b: 1, a: 1}
+    - _GeoLayerData1: {r: 1, g: 1, b: 1, a: 1}
+    - _GeoNearData: {r: 0.2, g: 50, b: 0, a: 0.5}
+    - _GlobalBlendData: {r: 0.00001, g: 1, b: 0, a: 0}
+    - _HeightData0: {r: 1, g: 1, b: 0, a: 0}
+    - _HeightData1: {r: 1, g: 1, b: 0, a: 0}
+    - _HeightData2: {r: 1, g: 1, b: 0, a: 0}
+    - _HeightData3: {r: 1, g: 1, b: 0, a: 0}
+    - _HeightData4: {r: 1, g: 1, b: 0, a: 0}
+    - _HeightData5: {r: 1, g: 1, b: 0, a: 0}
+    - _HeightData6: {r: 1, g: 1, b: 0, a: 0}
+    - _HeightData7: {r: 1, g: 1, b: 0, a: 0}
+    - _LayerDataA0: {r: 1, g: 0, b: 0.5, a: 1}
+    - _LayerDataA1: {r: 1, g: 0, b: 1, a: 1}
+    - _LayerDataA2: {r: 0, g: 0, b: 0, a: 0}
+    - _LayerDataA3: {r: 0, g: 0, b: 0, a: 0}
+    - _LayerDataA4: {r: 0, g: 0, b: 0, a: 0}
+    - _LayerDataA5: {r: 0, g: 0, b: 0, a: 0}
+    - _LayerDataA6: {r: 0, g: 0, b: 0, a: 0}
+    - _LayerDataA7: {r: 0, g: 0, b: 0, a: 0}
+    - _LayerST0: {r: 55.555557, g: 55.555557, b: 0, a: 0}
+    - _LayerST1: {r: 50, g: 50, b: 0, a: 0}
+    - _LayerST2: {r: 1, g: 1, b: 0, a: 0}
+    - _LayerST3: {r: 1, g: 1, b: 0, a: 0}
+    - _LayerST4: {r: 1, g: 1, b: 0, a: 0}
+    - _LayerST5: {r: 1, g: 1, b: 0, a: 0}
+    - _LayerST6: {r: 1, g: 1, b: 0, a: 0}
+    - _LayerST7: {r: 1, g: 1, b: 0, a: 0}
+    - _MacroVariationData: {r: 0.01, g: 0.001, b: 0.0001, a: 0.5}
+    - _MaskMapRemapData0: {r: 0, g: 0, b: 1, a: 1}
+    - _MaskMapRemapData1: {r: 0, g: 0, b: 1, a: 1}
+    - _MaskMapRemapData2: {r: 1, g: 1, b: 1, a: 1}
+    - _MaskMapRemapData3: {r: 1, g: 1, b: 1, a: 1}
+    - _MaskMapRemapData4: {r: 1, g: 1, b: 1, a: 1}
+    - _MaskMapRemapData5: {r: 1, g: 1, b: 1, a: 1}
+    - _MaskMapRemapData6: {r: 1, g: 1, b: 1, a: 1}
+    - _MaskMapRemapData7: {r: 1, g: 1, b: 1, a: 1}
+    - _ObjectSpaceDataA: {r: 0, g: 0, b: 0, a: 0}
+    - _TerrainHeightmapRecipSize: {r: 0.0019493178, g: 0.0019493178, b: 0.001953125, a: 0.001953125}
+    - _TerrainPosSize: {r: 0, g: 0, b: 1000, a: 1000}
+    - _TriPlanarData0: {r: 10, g: 10, b: 0, a: 0}
+    - _TriPlanarData1: {r: 10, g: 10, b: 0, a: 0}
+    - _TriPlanarData2: {r: 0, g: 0, b: 0, a: 0}
+    - _TriPlanarData3: {r: 0, g: 0, b: 0, a: 0}
+    - _TriPlanarData4: {r: 0, g: 0, b: 0, a: 0}
+    - _TriPlanarData5: {r: 0, g: 0, b: 0, a: 0}
+    - _TriPlanarData6: {r: 0, g: 0, b: 0, a: 0}
+    - _TriPlanarData7: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
