@@ -132,6 +132,13 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y += gravity * Time.deltaTime;
         }
+        else
+        {
+            if(velocity.y != 0f)
+            {
+                velocity.y = 0;
+            }
+        }
 
         if (horizVel.sqrMagnitude < 0.0001f)
         {
@@ -140,6 +147,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         controller.Move(velocity * Time.deltaTime);
+
+        
 
         Vector3 pos = transform.position;
 
@@ -151,6 +160,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         transform.position = pos;
+        
     }
 
     private Vector3 ApplyFriction(Vector3 vel, float friction)

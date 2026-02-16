@@ -5,14 +5,15 @@ TagManager:
   serializedVersion: 3
   tags:
   - Fire
+  - Flammable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - Post Processing
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 
