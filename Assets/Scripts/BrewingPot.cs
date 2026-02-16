@@ -25,8 +25,8 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable
         if (!collision.gameObject.TryGetComponent(out IngredientBase ingredient))
             return;
         
-        AddIngredient(ingredient.IngredientData);
-        Destroy(collision.gameObject);
+        // AddIngredient(ingredient.IngredientData);
+        // Destroy(collision.gameObject);
     }
 
     private void AddIngredient(IngredientData ingredient)

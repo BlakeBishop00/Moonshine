@@ -1,36 +1,45 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class StationBase : MonoBehaviour
+public class StationBase : MonoBehaviour, IInteractable
 {
     [HideInInspector] public UnityEvent<BrewingPot> OnStationEquipped;
     [HideInInspector] public UnityEvent OnStationUnequipped;
     [SerializeField] private Vector3 _positionOffset = Vector3.zero;
-    private BrewingPot _equippedBrewingPot;
+    protected Rigidbody _equippedBrewingPot;
 
-
-    void OnCollisionEnter(Collision collision)
+    public virtual bool Interact()
     {
-        if (!collision.gameObject.TryGetComponent(out BrewingPot brewingPot))
-            return;
-        
-        _equippedBrewingPot = brewingPot;
+        Rigidbody heldObject = PlayerController.Instance.PhysicsPickup.GetHeldObject();
+        if (heldObject == null)
+            return false;
 
-        Rigidbody rb = brewingPot.GetComponent<Rigidbody>();
-        rb.linearVelocity = Vector3.zero;
+        if (!heldObject.TryGetComponent(out BrewingPot brewingPot))
+            return false;
 
-        brewingPot.transform.position = transform.position + _positionOffset;
-        brewingPot.transform.rotation = transform.rotation;
+        if (_equippedBrewingPot != null)
+            return false;
+
+        PlayerController.Instance.PhysicsPickup.DropObject();
+        _equippedBrewingPot = heldObject;
+        _equippedBrewingPot.isKinematic = true;
+        _equippedBrewingPot.transform.position = transform.position + _positionOffset;
+        _equippedBrewingPot.transform.rotation = transform.rotation;
 
         OnStationEquipped.Invoke(brewingPot);
+
+        PlayerController.Instance.PhysicsPickup.OnPickup.AddListener(OnPlayerPickup);
+        return true;
     }
 
-    void OnCollisionExit(Collision collision)
+    private void OnPlayerPickup(Rigidbody pickedUpObject)
     {
-        if (collision.gameObject.TryGetComponent(out BrewingPot brewingPot) && brewingPot == _equippedBrewingPot)
+        if (pickedUpObject == _equippedBrewingPot)
         {
-            OnStationUnequipped.Invoke();
+            _equippedBrewingPot.isKinematic = false;
             _equippedBrewingPot = null;
+            OnStationUnequipped.Invoke();
+            PlayerController.Instance.PhysicsPickup.OnPickup.RemoveListener(OnPlayerPickup);
         }
     }
 }
