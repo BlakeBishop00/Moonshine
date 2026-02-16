@@ -1,9 +1,15 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PhysicsPickup : MonoBehaviour
 {
+    [HideInInspector] public UnityEvent<Rigidbody> OnPickup;
+    [HideInInspector] public UnityEvent<Rigidbody> OnDrop;
+
+    [Header("Interact Settings")]
+    [SerializeField] private LayerMask _interactLayer;
     [Header("Pickup Settings")]
-    [SerializeField] private LayerMask pickupLayer;
+    [SerializeField] private LayerMask _pickupLayer;
     [SerializeField] private float _pickupRange = 6f;
     [SerializeField] private float _holdDistance = 2f;
     [SerializeField] private float _moveForce = 500f;
@@ -32,12 +38,31 @@ public class PhysicsPickup : MonoBehaviour
             MoveObject();
     }
 
+    public void DropObject()
+    {
+        _heldObject.useGravity = true;
+        _heldObject.linearDamping = _originalLinearDamping;
+        OnDrop.Invoke(_heldObject);
+        _heldObject = null;
+    }
+
+    public Rigidbody GetHeldObject() => _heldObject;
+
     void HandleInteract()
     {
         if (_heldObject == null)
-            TryPickup();
-        else
-            DropObject();
+        {
+            if (TryPickup())
+                return;
+
+            TryInteract();
+            return;
+        }
+
+        if (TryInteract())
+            return;
+
+        DropObject();
     }
 
     void HandleThrow()
@@ -46,21 +71,39 @@ public class PhysicsPickup : MonoBehaviour
             ThrowObject();
     }
 
-    void TryPickup()
+    bool TryPickup()
     {
         Ray ray = new Ray(_playerCamera.transform.position, _playerCamera.transform.forward);
         RaycastHit hit;
 
-        if (!Physics.Raycast(ray, out hit, _pickupRange, pickupLayer))
-            return;
+        if (!Physics.Raycast(ray, out hit, _pickupRange, _pickupLayer))
+            return false;
         
         if (!hit.collider.TryGetComponent(out Rigidbody rb))
-            return;
+            return false;
 
         _heldObject = rb;
         _originalLinearDamping = _heldObject.linearDamping;
         _heldObject.linearDamping = _linearDampening;
         _heldObject.useGravity = false;
+        OnPickup.Invoke(_heldObject);
+
+        return true;
+    }
+
+    bool TryInteract()
+    {
+        Ray ray = new Ray(_playerCamera.transform.position, _playerCamera.transform.forward);
+        RaycastHit hit;
+
+        if (!Physics.Raycast(ray, out hit, _pickupRange, _interactLayer))
+            return false;
+        
+        if (!hit.collider.TryGetComponent(out IInteractable interactable))
+            return false;
+
+        interactable.Interact();
+        return true;
     }
 
     void MoveObject()
@@ -74,13 +117,6 @@ public class PhysicsPickup : MonoBehaviour
         Quaternion targetRotation = _playerCamera.transform.rotation;
         Quaternion newRotation = Quaternion.Slerp(_heldObject.rotation, targetRotation, _rotateSpeed * Time.fixedDeltaTime);
         _heldObject.MoveRotation(newRotation);
-    }
-
-    public void DropObject()
-    {
-        _heldObject.useGravity = true;
-        _heldObject.linearDamping = _originalLinearDamping;
-        _heldObject = null;
     }
 
     void ThrowObject()
