@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     public float airAccelTime = 0.5f;
 
     public float airFriction = 0.5f;
+    [Header("Jumping")]
+    public float jumpForce = 8f;
 
     [Header("Mouse Look")]
     public float mouseSensitivity = 2f;
@@ -71,6 +73,8 @@ public class PlayerMovement : MonoBehaviour
 
         inputActions.Player.Look.performed += ctx => lookInput = ctx.ReadValue<Vector2>();
         inputActions.Player.Look.canceled += ctx => lookInput = Vector2.zero;
+
+        inputActions.Player.Jump.performed += ctx => DoJump();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -151,6 +155,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
         transform.position = pos;
+    }
+
+    private void DoJump()
+    {
+        if (!isGrounded)
+            return;
+            
+        velocity.y = jumpForce;
+        isGrounded = false;
     }
 
     private Vector3 ApplyFriction(Vector3 vel, float friction)
