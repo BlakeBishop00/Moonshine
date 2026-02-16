@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 9
-  gravity: -80
+  gravity: -29.4
   groundAccelTime: 0.01
   groundStopTime: 0.06
   stopSharpness: 3
@@ -177,6 +177,7 @@ MonoBehaviour:
   worldFloor: -0.1
   airAccelTime: 0.5
   airFriction: 0.1
+  jumpForce: 10
   mouseSensitivity: 0.06
   cameraTransform: {fileID: 3377666901986503641}
   minPitch: -80
