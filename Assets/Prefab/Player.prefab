@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2772897098745507255}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.704, z: 0}
+  m_LocalPosition: {x: 0, y: 0.718, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -196,7 +196,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1.75
+  m_Height: 1.58
   m_Radius: 0.3
   m_SlopeLimit: 60
   m_StepOffset: 0.2
@@ -234,18 +234,20 @@ MonoBehaviour:
   stopSharpness: 3
   WorldBorder: {x: 1596, y: 1596}
   worldFloor: -0.1
-  airAccelTime: 0.5
-  airFriction: 0.1
+  airAccelTime: 0.2
+  airFriction: 0.4
   jumpForce: 10
   mouseSensitivity: 0.06
   cameraTransform: {fileID: 3377666901986503641}
   minPitch: -80
   maxPitch: 80
   groundCheck: {fileID: 6444225544856623531}
-  groundDistance: 0.1
+  groundCollideDist: 0.1
+  allowJumpDist: 0.1
   groundMask:
     serializedVersion: 2
     m_Bits: 1
+  pauseGroundChecksTime: 0.08
 --- !u!114 &1539544173203904373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +260,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eed1b523ae268074785a23183a6f1f33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PhysicsPickup
+  OnPickup:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDrop:
+    m_PersistentCalls:
+      m_Calls: []
   _interactLayer:
     serializedVersion: 2
     m_Bits: 1
@@ -415,7 +423,7 @@ Transform:
   m_GameObject: {fileID: 7625642379819718296}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.88, z: 0}
+  m_LocalPosition: {x: 0, y: -0.8765, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -571,7 +579,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8799997, y: 0.8799997, z: 0.8799997}
+  m_LocalScale: {x: 0.6, y: 0.8749999, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4941171389965024992}
