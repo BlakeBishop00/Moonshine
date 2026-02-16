@@ -76,7 +76,7 @@ public class PhysicsPickup : MonoBehaviour
         _heldObject.MoveRotation(newRotation);
     }
 
-    void DropObject()
+    public void DropObject()
     {
         _heldObject.useGravity = true;
         _heldObject.linearDamping = _originalLinearDamping;

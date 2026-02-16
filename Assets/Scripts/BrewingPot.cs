@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BrewingPot : MonoBehaviour, IAgeable, IFlammable
+public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable
 {
     private Renderer _renderer;
     private IngredientData _currentMixture;
@@ -56,5 +56,13 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable
 
         // Temporary Visual feedback
         _renderer.material.color = Color.Lerp(_renderer.material.color, Color.red, 0.1f);
+    }
+
+    public void TickMix()
+    {
+        Debug.Log("Mixing mixture");
+
+        // Temporary Visual feedback
+        _renderer.material.color = Color.Lerp(_renderer.material.color, Color.green, 0.1f);
     }
 }
