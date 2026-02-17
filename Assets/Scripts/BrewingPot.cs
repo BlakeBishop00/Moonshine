@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable
+public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IInteractable
 {
     private Renderer _renderer;
     private IngredientData _currentMixture;
@@ -64,5 +64,22 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable
 
         // Temporary Visual feedback
         _renderer.material.color = Color.Lerp(_renderer.material.color, Color.green, 0.1f);
+    }
+
+    public bool Interact()
+    {
+        Debug.Log("Interacting with brewing pot");
+        Rigidbody heldObject = PlayerController.Instance.PhysicsPickup.GetHeldObject();
+
+        if (heldObject == null)
+            return false;
+
+        if (!heldObject.TryGetComponent(out Bottle bottle))
+            return false;
+
+        // TODO: Add logic for transfering mixture to bottle i.e. should this mixture be bottleable? should we only transfer a portion of the mixture? etc.
+        bottle.SetMixture(_currentMixture);
+        Debug.Log("Transferred mixture to bottle");
+        return true;
     }
 }

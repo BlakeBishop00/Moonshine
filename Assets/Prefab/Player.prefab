@@ -268,12 +268,12 @@ MonoBehaviour:
       m_Calls: []
   _interactLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 1025
   _pickupLayer:
     serializedVersion: 2
     m_Bits: 1024
   _pickupRange: 6
-  _holdDistance: 2
+  _holdDistance: 1
   _moveForce: 500
   _rotateSpeed: 50
   _throwForce: 20

@@ -5,19 +5,55 @@ public class StationBase : MonoBehaviour, IInteractable
 {
     [HideInInspector] public UnityEvent<BrewingPot> OnStationEquipped;
     [HideInInspector] public UnityEvent OnStationUnequipped;
+    [HideInInspector] public UnityEvent OnStationTick;
+
+    [Header("Station Settings")]
     [SerializeField] private Vector3 _positionOffset = Vector3.zero;
+    [SerializeField] private float _tickRate = 60f;
     protected Rigidbody _equippedBrewingPot;
+    protected bool _isActive = false;
+    private float _tickTimer = 0f;
+
+    void Update()
+    {
+        if (!_isActive)
+        {
+            _tickTimer = 0f;
+            return;
+        }
+
+        _tickTimer += Time.deltaTime;
+
+        float ageingTime = _tickRate / 60f;
+
+        if (_tickTimer < ageingTime)
+            return;
+        
+        _tickTimer = 0f;
+
+        OnStationTick.Invoke();
+    }
 
     public virtual bool Interact()
     {
+        if (HandlePlacement())
+            return true;
+        
+        _isActive = !_isActive;
+        return true;
+    }
+
+    private bool HandlePlacement()
+    {
         Rigidbody heldObject = PlayerController.Instance.PhysicsPickup.GetHeldObject();
+        
+        if (_equippedBrewingPot != null)
+            return false;
+
         if (heldObject == null)
             return false;
 
         if (!heldObject.TryGetComponent(out BrewingPot brewingPot))
-            return false;
-
-        if (_equippedBrewingPot != null)
             return false;
 
         PlayerController.Instance.PhysicsPickup.DropObject();

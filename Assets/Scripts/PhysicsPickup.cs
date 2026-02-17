@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,6 +19,7 @@ public class PhysicsPickup : MonoBehaviour
     [SerializeField] private float _throwForce = 10f;
     [SerializeField] private float _linearDampening = 10f;
 
+    private List<Collider> _colliders = new List<Collider>();
     private Camera _playerCamera;
     private PlayerInputActions _inputActions;
     private Rigidbody _heldObject;
@@ -42,6 +45,7 @@ public class PhysicsPickup : MonoBehaviour
     {
         _heldObject.useGravity = true;
         _heldObject.linearDamping = _originalLinearDamping;
+        _colliders.ForEach(c => c.enabled = true);
         OnDrop.Invoke(_heldObject);
         _heldObject = null;
     }
@@ -88,6 +92,9 @@ public class PhysicsPickup : MonoBehaviour
         _heldObject.useGravity = false;
         OnPickup.Invoke(_heldObject);
 
+        _colliders = _heldObject.GetComponentsInChildren<Collider>().ToList();
+        _colliders.ForEach(c => c.enabled = false);
+
         return true;
     }
 
@@ -102,8 +109,8 @@ public class PhysicsPickup : MonoBehaviour
         if (!hit.collider.TryGetComponent(out IInteractable interactable))
             return false;
 
-        interactable.Interact();
-        return true;
+        bool success = interactable.Interact();
+        return success;
     }
 
     void MoveObject()
@@ -124,6 +131,7 @@ public class PhysicsPickup : MonoBehaviour
         _heldObject.useGravity = true;
         _heldObject.linearDamping = _originalLinearDamping;
         _heldObject.AddForce(_playerCamera.transform.forward * _throwForce, ForceMode.Impulse);
+        _colliders.ForEach(c => c.enabled = true);
         _heldObject = null;
     }
 }
