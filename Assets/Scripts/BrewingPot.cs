@@ -1,18 +1,36 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IInteractable
 {
-    private Renderer _renderer;
-    private IngredientData _currentMixture;
+    [SerializeField] private Vector3 _ingredientOffsetMin = Vector3.zero;
+    [SerializeField] private Vector3 _ingredientOffsetMax = Vector3.zero;
+    [SerializeField] private float _bobRange = 0.01f;
+    [SerializeField] private float _bobSpeed = 1f;
 
-    void Awake()
-    {
-        _renderer = GetComponent<Renderer>();
-    }
+    private IngredientData _currentMixture;
+    private List<IngredientBase> _attachedIngredients = new List<IngredientBase>();
+    private Dictionary<IngredientBase, Vector3> _ingredientPositionsLookup = new Dictionary<IngredientBase, Vector3>();
 
     void Start()
     {
         ResetPot();
+    }
+
+    void Update()
+    {
+        BobIngredients();
+    }
+
+    private void BobIngredients()
+    {
+        for (int i = 0; i < _attachedIngredients.Count; i++)
+        {
+            IngredientBase ingredient = _attachedIngredients[i];
+            Vector3 originalPosition = _ingredientPositionsLookup[ingredient];
+            ingredient.transform.localPosition = originalPosition + Vector3.up * Mathf.Sin(Time.time * _bobSpeed + i) * _bobRange;
+            ingredient.gameObject.transform.rotation = transform.rotation;
+        }
     }
 
     public void ResetPot()
@@ -20,55 +38,52 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IIntera
         _currentMixture = ScriptableObject.CreateInstance<IngredientData>();
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!collision.gameObject.TryGetComponent(out IngredientBase ingredient))
-            return;
-        
-        // AddIngredient(ingredient.IngredientData);
-        // Destroy(collision.gameObject);
-    }
-
     private void AddIngredient(IngredientData ingredient)
     {
         Debug.Log("Added ingredient: " + ingredient.name);
 
-        _currentMixture.WaterValue += ingredient.WaterValue;
-        _currentMixture.YeastValue += ingredient.YeastValue;
-        _currentMixture.SweetValue += ingredient.SweetValue;
-        _currentMixture.SourValue += ingredient.SourValue; 
-        _currentMixture.BitterValue += ingredient.BitterValue;
-        _currentMixture.SaltyValue += ingredient.SaltyValue;
-        _currentMixture.UmamiValue += ingredient.UmamiValue;
+        _currentMixture += ingredient;
     }
 
     public void TickAge()
     {
         Debug.Log("Aging mixture");
 
-        // Temporary Visual feedback
-        _renderer.material.color = Color.Lerp(_renderer.material.color, Color.black, 0.1f);
     }
 
     public void TickFire()
     {
         Debug.Log("Heating mixture");
 
-        // Temporary Visual feedback
-        _renderer.material.color = Color.Lerp(_renderer.material.color, Color.red, 0.1f);
     }
 
     public void TickMix()
     {
         Debug.Log("Mixing mixture");
 
-        // Temporary Visual feedback
-        _renderer.material.color = Color.Lerp(_renderer.material.color, Color.green, 0.1f);
+        if (_attachedIngredients.Count == 0)
+            return;
+            
+        IngredientBase randomIngredient = _attachedIngredients[Random.Range(0, _attachedIngredients.Count)];
+        AddIngredient(randomIngredient.IngredientData);
+        _attachedIngredients.Remove(randomIngredient);
+        _ingredientPositionsLookup.Remove(randomIngredient);
+        Destroy(randomIngredient.gameObject);
     }
 
     public bool Interact()
     {
-        Debug.Log("Interacting with brewing pot");
+        if (HandleBottling())
+            return true;
+
+        if (HandleIngredientDeposit())
+            return true;
+
+        return false;
+    }
+
+    private bool HandleBottling()
+    {
         Rigidbody heldObject = PlayerController.Instance.PhysicsPickup.GetHeldObject();
 
         if (heldObject == null)
@@ -80,6 +95,35 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IIntera
         // TODO: Add logic for transfering mixture to bottle i.e. should this mixture be bottleable? should we only transfer a portion of the mixture? etc.
         bottle.SetMixture(_currentMixture);
         Debug.Log("Transferred mixture to bottle");
+        return true;
+    }
+
+    private bool HandleIngredientDeposit()
+    {
+        Rigidbody heldObject = PlayerController.Instance.PhysicsPickup.GetHeldObject();
+
+        if (heldObject == null)
+            return false;
+
+        if (!heldObject.TryGetComponent(out IngredientBase ingredient))
+            return false;
+
+        PlayerController.Instance.PhysicsPickup.DropObject();
+        
+        ingredient.GetComponent<Rigidbody>().isKinematic = true;
+        ingredient.GetComponent<Collider>().enabled = false;
+        ingredient.gameObject.transform.SetParent(transform);
+        Vector3 randomOffset = new Vector3(
+            Random.Range(_ingredientOffsetMin.x, _ingredientOffsetMax.x),
+            Random.Range(_ingredientOffsetMin.y, _ingredientOffsetMax.y),
+            Random.Range(_ingredientOffsetMin.z, _ingredientOffsetMax.z)
+        );
+        ingredient.gameObject.transform.rotation = Quaternion.identity;
+        ingredient.gameObject.transform.localPosition = randomOffset;
+
+        _attachedIngredients.Add(ingredient);
+        _ingredientPositionsLookup[ingredient] = randomOffset;
+
         return true;
     }
 }

@@ -92,7 +92,7 @@ public class PhysicsPickup : MonoBehaviour
         _heldObject.useGravity = false;
         OnPickup.Invoke(_heldObject);
 
-        _colliders = _heldObject.GetComponentsInChildren<Collider>().ToList();
+        _colliders = _heldObject.GetComponents<Collider>().ToList();
         _colliders.ForEach(c => c.enabled = false);
 
         return true;
@@ -121,7 +121,7 @@ public class PhysicsPickup : MonoBehaviour
 
         _heldObject.linearVelocity = direction * _moveForce * Time.fixedDeltaTime;
 
-        Quaternion targetRotation = _playerCamera.transform.rotation;
+        Quaternion targetRotation = Quaternion.Euler(0f, _playerCamera.transform.eulerAngles.y, 0f);
         Quaternion newRotation = Quaternion.Slerp(_heldObject.rotation, targetRotation, _rotateSpeed * Time.fixedDeltaTime);
         _heldObject.MoveRotation(newRotation);
     }

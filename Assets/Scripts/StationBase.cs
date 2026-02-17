@@ -24,9 +24,10 @@ public class StationBase : MonoBehaviour, IInteractable
 
         _tickTimer += Time.deltaTime;
 
-        float ageingTime = _tickRate / 60f;
+        // Convert tick rate to seconds and check if its time to tick
+        float timeTillTick = 1f / _tickRate;
 
-        if (_tickTimer < ageingTime)
+        if (_tickTimer < timeTillTick)
             return;
         
         _tickTimer = 0f;
