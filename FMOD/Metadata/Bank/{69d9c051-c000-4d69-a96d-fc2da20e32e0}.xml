@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="Bank" id="{69d9c051-c000-4d69-a96d-fc2da20e32e0}">
+		<property name="name">
+			<value>AffectedByReverb</value>
+		</property>
+		<relationship name="folder">
+			<destination>{0f5468b2-c365-4d84-bd10-09b5158d4d33}</destination>
+		</relationship>
+	</object>
+</objects>

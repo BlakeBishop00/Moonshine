@@ -22,11 +22,65 @@ MonoBehaviour:
   - {fileID: 4377575606478929505}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-7606955660903756129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: snapshot:/TESTING
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: snapshot:/TESTING
+  Guid:
+    Data1: 426918455
+    Data2: 1239610881
+    Data3: -1174663792
+    Data4: 1663818255
+  Banks:
+  - {fileID: 4377575606478929505}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &-1270586983071751104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ambience/weather system/rain
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/ambience/weather system/rain
+  Guid:
+    Data1: -273290907
+    Data2: 1094063757
+    Data3: 2003520666
+    Data4: 1344854691
+  Banks:
+  - {fileID: 4377575606478929505}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 9037
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,16 +98,22 @@ MonoBehaviour:
   - {fileID: 4377575606478929505}
   EditorEvents:
   - {fileID: -8285990138115140490}
+  - {fileID: -1270586983071751104}
+  - {fileID: -7606955660903756129}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4377575606478929505}
   StringsBanks:
   - {fileID: 6343705817663242416}
   cacheVersion: 131858
-  cacheTime: 639068782446438557
+  cacheTime: 639069233933377042
   SerializableEventsDict:
   - key: event:/test
     index: 0
+  - key: event:/ambience/weather system/rain
+    index: 1
+  - key: snapshot:/TESTING
+    index: 2
 --- !u!114 &4377575606478929505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,10 +129,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639068782446438557
+  lastModified: 639069233933367018
   FileSizes:
   - Name: Desktop
-    Value: 24512
+    Value: 148384
   Exists: 1
 --- !u!114 &6343705817663242416
 MonoBehaviour:
@@ -89,8 +149,8 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639068782446438557
+  lastModified: 639069233933377042
   FileSizes:
   - Name: Desktop
-    Value: 766
+    Value: 884
   Exists: 1

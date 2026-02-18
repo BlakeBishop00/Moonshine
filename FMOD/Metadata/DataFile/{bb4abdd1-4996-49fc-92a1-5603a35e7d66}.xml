@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="DataFile" id="{bb4abdd1-4996-49fc-92a1-5603a35e7d66}">
+		<property name="assetPath">
+			<value>weather system/Sounds/Thunder/Thunder 3.wav.meta</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{f730fc55-481b-44e1-a21c-9c8220b15594}</destination>
+		</relationship>
+	</object>
+</objects>
