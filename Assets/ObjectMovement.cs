@@ -1,6 +1,4 @@
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class ObjectMovement : MonoBehaviour
 {
