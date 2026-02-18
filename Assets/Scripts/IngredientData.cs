@@ -3,9 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Ingredient", menuName = "Ingredient Data")]
 public class IngredientData : ScriptableObject
 {
-    public IngredientData(float waterValue, float yeastValue, float sweetValue, float sourValue, float bitterValue, float saltyValue, float umamiValue)
+    public IngredientData(float yeastValue, float sweetValue, float sourValue, float bitterValue, float saltyValue, float umamiValue)
     {
-        WaterValue = waterValue;
         YeastValue = yeastValue;
         SweetValue = sweetValue;
         SourValue = sourValue;
@@ -14,7 +13,6 @@ public class IngredientData : ScriptableObject
         UmamiValue = umamiValue;
     }
 
-    public float WaterValue;
     public float YeastValue;
     public float SweetValue;
     public float SourValue;
@@ -29,7 +27,6 @@ public class IngredientData : ScriptableObject
 
         IngredientData result = CreateInstance<IngredientData>();
 
-        result.WaterValue = a.WaterValue + b.WaterValue;
         result.YeastValue = a.YeastValue + b.YeastValue;
         result.SweetValue = a.SweetValue + b.SweetValue;
         result.SourValue = a.SourValue + b.SourValue;

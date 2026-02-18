@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b55a9a2c1f48a74382a7c6bb272409b, type: 3}
-  m_Name: Carrot
+  m_Name: Apple
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  IngredientName: Carrot
-  SweetValue: 0
-  SourValue: 0
-  BitterValue: 0
+  YeastValue: 0
+  SweetValue: 65
+  SourValue: 30
+  BitterValue: 5
   SaltyValue: 0
-  UmamiValue: 0
+  UmamiValue: 2

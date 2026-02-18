@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class HeatingStation : StationBase
 {
+    [SerializeField] private Renderer _heatingEffectRenderer;
     private IFlammable _flammableObject;
 
     void Start()
@@ -26,5 +27,17 @@ public class HeatingStation : StationBase
                 _flammableObject.TickFire();
             }
         });
+
+        OnStationActivate.AddListener(() =>
+        {
+            _heatingEffectRenderer.material.color = Color.red;
+        });
+
+        OnStationDeactivate.AddListener(() =>
+        {
+            _heatingEffectRenderer.material.color = Color.gray;
+        });
+
+        _heatingEffectRenderer.material.color = Color.gray;
     }
 }

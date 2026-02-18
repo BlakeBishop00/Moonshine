@@ -6,6 +6,8 @@ public class StationBase : MonoBehaviour, IInteractable
     [HideInInspector] public UnityEvent<BrewingPot> OnStationEquipped;
     [HideInInspector] public UnityEvent OnStationUnequipped;
     [HideInInspector] public UnityEvent OnStationTick;
+    [HideInInspector] public UnityEvent OnStationActivate;
+    [HideInInspector] public UnityEvent OnStationDeactivate;
 
     [Header("Station Settings")]
     [SerializeField] private Vector3 _positionOffset = Vector3.zero;
@@ -41,6 +43,16 @@ public class StationBase : MonoBehaviour, IInteractable
             return true;
         
         _isActive = !_isActive;
+        
+        if (_isActive)
+        {
+            OnStationActivate.Invoke();
+        }
+        else
+        {
+            OnStationDeactivate.Invoke();
+        }
+
         return true;
     }
 
