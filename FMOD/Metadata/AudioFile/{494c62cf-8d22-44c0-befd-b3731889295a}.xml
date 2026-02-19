@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{494c62cf-8d22-44c0-befd-b3731889295a}">
+		<property name="assetPath">
+			<value>Moonshine_Music1_Demo_18_Feb_DanielG.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>54.935510204081631</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{f730fc55-481b-44e1-a21c-9c8220b15594}</destination>
+		</relationship>
+	</object>
+</objects>
