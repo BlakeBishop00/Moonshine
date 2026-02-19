@@ -11,14 +11,18 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IWatera
     [SerializeField] private float _bobRange = 0.01f;
     [SerializeField] private float _bobSpeed = 1f;
 
+    private StationBase _currentStation;
     private IngredientData _currentMixture;
+    private Renderer _liquidRenderer;
     private int _waterLevel = 0;
     private int _ageLevel = 0;
     private List<IngredientBase> _attachedIngredients = new List<IngredientBase>();
     private Dictionary<IngredientBase, Vector3> _ingredientPositionsLookup = new Dictionary<IngredientBase, Vector3>();
 
-    void Start()
+    void Awake()
     {
+        _liquidRenderer = _liquidVisual.GetComponent<Renderer>();
+
         ResetPot();
     }
 
@@ -50,7 +54,9 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IWatera
     public void ResetPot()
     {
         _currentMixture = ScriptableObject.CreateInstance<IngredientData>();
-        UpdateWaterLevel();
+        _waterLevel = 0;
+        _ageLevel = 0;
+        UpdateWater();
     }
 
     private void AddIngredient(IngredientData ingredient)
@@ -58,6 +64,7 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IWatera
         Debug.Log("Added ingredient: " + ingredient.name);
 
         _currentMixture += ingredient;
+        UpdateWater();
     }
 
     public void TickAge()
@@ -71,13 +78,35 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IWatera
         _currentMixture.YeastValue -= 20;
 
         _ageLevel += 1;
+        _ageLevel = Mathf.Clamp(_ageLevel, 0, 5);
+        UpdateWater();
         _ageingEffect.Play();
     }
 
     public void TickFire()
     {
-        Debug.Log("Heating mixture");
+        DistillCollector distillCollector = _currentStation.GetComponentInChildren<DistillCollector>();
 
+        if (distillCollector == null)
+        {
+            Debug.Log("No distill collector found");
+            return;
+        }
+
+        if (_waterLevel > 0)
+        {
+            bool success = distillCollector.DepositMixture(_currentMixture, _ageLevel);
+            if (!success)
+            {
+                Debug.Log("Failed to deposit mixture into distill collector");
+                return;
+            }
+            _waterLevel -= 1;
+            UpdateWater();
+        } else
+        {
+            ResetPot();
+        }
     }
 
     public void TickMix()
@@ -108,7 +137,7 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IWatera
         _waterLevel += 1;
         _waterLevel = Mathf.Clamp(_waterLevel, 0, 5);
 
-        UpdateWaterLevel();
+        UpdateWater();
     }
 
     public bool Interact()
@@ -122,9 +151,17 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IWatera
         return false;
     }
 
-    private void UpdateWaterLevel()
+    public void SetStation(StationBase station)
+    {
+        _currentStation = station;
+    }
+
+    private void UpdateWater()
     {
         _liquidVisual.transform.localPosition = new Vector3(0, _waterLevel * 0.5f + 1, 0);
+        Color color = IngredientData.GetFlavorColor(_currentMixture) * Mathf.Pow(0.8f, _ageLevel);
+        color = (color == Color.black) ? Color.blue : color; // Blue if no ingredients added
+        _liquidRenderer.material.color = color;
         _liquidVisual.SetActive(_waterLevel > 0);
     }
 
@@ -138,8 +175,22 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IWatera
         if (!heldObject.TryGetComponent(out Bottle bottle))
             return false;
 
-        // TODO: Add logic for transfering mixture to bottle i.e. should this mixture be bottleable? should we only transfer a portion of the mixture? etc.
-        bottle.SetMixture(_currentMixture);
+        if (_waterLevel <= 0f)
+        {
+            Debug.Log("Not enough water to bottle");
+            return false;
+        }
+
+        if (_ageLevel <= 0)
+        {
+            Debug.Log("Not aged enough to bottle");
+            return false;
+        }
+
+        _waterLevel--;
+        UpdateWater();
+
+        bottle.SetMixture(_currentMixture, _ageLevel);
         Debug.Log("Transferred mixture to bottle");
         return true;
     }

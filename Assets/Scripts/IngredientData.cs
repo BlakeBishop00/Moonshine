@@ -36,4 +36,15 @@ public class IngredientData : ScriptableObject
 
         return result;
     }
+
+    public static Color GetFlavorColor(IngredientData mixture)
+    {
+        float r = mixture.SweetValue;
+        float g = mixture.SourValue + mixture.BitterValue;
+        float b = mixture.SaltyValue + mixture.UmamiValue;
+
+        Color baseColor = new Color(r / 100f, g / 100f, b / 100f);
+
+        return baseColor;
+    }
 }

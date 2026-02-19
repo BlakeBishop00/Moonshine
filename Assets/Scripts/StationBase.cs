@@ -76,6 +76,7 @@ public class StationBase : MonoBehaviour, IInteractable
         _equippedBrewingPot.transform.rotation = transform.rotation;
 
         OnStationEquipped.Invoke(brewingPot);
+        brewingPot.SetStation(this);
 
         PlayerController.Instance.PhysicsPickup.OnPickup.AddListener(OnPlayerPickup);
         return true;

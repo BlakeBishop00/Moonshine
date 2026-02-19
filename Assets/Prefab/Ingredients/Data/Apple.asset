@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Apple
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   YeastValue: 0
-  SweetValue: 65
-  SourValue: 30
+  SweetValue: 30
+  SourValue: 10
   BitterValue: 5
   SaltyValue: 0
-  UmamiValue: 2
+  UmamiValue: 5

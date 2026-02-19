@@ -1,30 +1,30 @@
 using UnityEngine;
 
-public class HeatingStation : StationBase
+public class DistillStation : StationBase
 {
     [SerializeField] private Renderer _heatingEffectRenderer;
-    private IFlammable _flammableObject;
+    private IFlammable _iflammableObject;
 
     void Start()
     {
         OnStationEquipped.AddListener((brewingPot) =>
         {
-            if (brewingPot.TryGetComponent(out IFlammable flammable))
+            if (brewingPot.TryGetComponent(out IFlammable iflammableObject))
             {
-                _flammableObject = flammable;
+                _iflammableObject = iflammableObject;
             }
         });
 
         OnStationUnequipped.AddListener(() =>
         {
-            _flammableObject = null;
+            _iflammableObject = null;
         });
 
         OnStationTick.AddListener(() =>
         {
-            if (_flammableObject != null)
+            if (_iflammableObject != null)
             {
-                _flammableObject.TickFire();
+                _iflammableObject.TickFire();
             }
         });
 

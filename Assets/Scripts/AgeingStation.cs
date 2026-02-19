@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class AgeingStation : StationBase
 {
+    [SerializeField] private Renderer _ageingEffectRenderer;
     private IAgeable _ageableObject;
 
     void Start()
@@ -26,6 +27,16 @@ public class AgeingStation : StationBase
             {
                 _ageableObject.TickAge();
             }
+        });
+
+        OnStationActivate.AddListener(() =>
+        {
+            _ageingEffectRenderer.material.color = Color.yellow;
+        });
+
+        OnStationDeactivate.AddListener(() =>
+        {
+            _ageingEffectRenderer.material.color = Color.gray;
         });
     }
 }
