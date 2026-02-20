@@ -5,6 +5,8 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance { get; private set; }
     public PhysicsPickup PhysicsPickup { get; private set; }
     public PlayerMovement PlayerMovement { get; private set; }
+    public PlayerInspector PlayerInspector { get; private set; }
+    public PlayerWallet PlayerWallet { get; private set; }
 
 
     void Awake()
@@ -19,5 +21,7 @@ public class PlayerController : MonoBehaviour
 
         PhysicsPickup = GetComponent<PhysicsPickup>();
         PlayerMovement = GetComponent<PlayerMovement>();
+        PlayerInspector = GetComponent<PlayerInspector>();
+        PlayerWallet = GetComponent<PlayerWallet>();
     }
 }

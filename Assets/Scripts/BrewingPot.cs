@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IWaterable, IInteractable
+public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IWaterable, IInteractable, IInspectable
 {
     [SerializeField] private GameObject _liquidVisual;
     [SerializeField] private ParticleSystem _ageingEffect;
@@ -222,5 +222,10 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IWatera
         _ingredientPositionsLookup[ingredient] = randomOffset;
 
         return true;
+    }
+
+    public IngredientData GetStats()
+    {
+        return _currentMixture;
     }
 }

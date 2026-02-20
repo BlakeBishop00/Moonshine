@@ -152,6 +152,8 @@ GameObject:
   - component: {fileID: 6682967027491752037}
   - component: {fileID: 2781036462236222688}
   - component: {fileID: 1539544173203904373}
+  - component: {fileID: 503524430928896256}
+  - component: {fileID: 6596284910756881593}
   - component: {fileID: 1456016994540332534}
   m_Layer: 3
   m_Name: Player
@@ -268,7 +270,7 @@ MonoBehaviour:
       m_Calls: []
   _interactLayer:
     serializedVersion: 2
-    m_Bits: 1025
+    m_Bits: 1089
   _pickupLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -278,6 +280,40 @@ MonoBehaviour:
   _rotateSpeed: 50
   _throwForce: 20
   _linearDampening: 10
+--- !u!114 &503524430928896256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6536560034209768490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 712ef3307cbdf8d4da4923a8793cb5ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInspector
+  OnInspect:
+    m_PersistentCalls:
+      m_Calls: []
+  _inspectLayer:
+    serializedVersion: 2
+    m_Bits: 1088
+  _inspectRange: 6
+--- !u!114 &6596284910756881593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6536560034209768490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1825b433c9e1b840b9aa12a17a84671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  OnBalanceChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!136 &1456016994540332534
 CapsuleCollider:
   m_ObjectHideFlags: 0

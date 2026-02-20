@@ -1,6 +1,7 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class Bottle : MonoBehaviour
+public class Bottle : MonoBehaviour, IInspectable
 {
     private IngredientData _currentMixture;
     private int _ageLevel = 0;
@@ -9,6 +10,7 @@ public class Bottle : MonoBehaviour
     void Start()
     {
         _renderer = GetComponent<Renderer>();
+        _currentMixture = ScriptableObject.CreateInstance<IngredientData>();
     }
 
     public void SetMixture(IngredientData mixture, int ageLevel)
@@ -19,5 +21,14 @@ public class Bottle : MonoBehaviour
         _ageLevel = ageLevel;
     }
 
+    public void GetMixture(out IngredientData mixture, out int ageLevel)
+    {
+        mixture = _currentMixture;
+        ageLevel = _ageLevel;
+    }
 
+    public IngredientData GetStats()
+    {
+        return _currentMixture;
+    }
 }
