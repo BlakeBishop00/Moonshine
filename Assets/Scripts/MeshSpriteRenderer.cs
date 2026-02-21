@@ -9,11 +9,6 @@ public class MeshSpriteRenderer : MonoBehaviour
 
     void Awake()
     {
-        if(mr == null)
-        {
-            mr = GetComponent<MeshRenderer>();
-        }
-
         mr.sharedMaterial = sharedMaterial;
 
         if (mpb == null)
