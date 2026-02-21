@@ -1,5 +1,18 @@
 {
   "dependencies": {
+    "com.jbooth.better-shaders": {
+      "version": "file:com.jbooth.better-shaders",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "com.sr4dev.unity-spriteassist": {
+      "version": "https://github.com/sr4dev/Unity-SpriteAssist.git?path=Assets/SpriteAssist",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a138d068de90346d8a557aff9ab738377c8b81d3"
+    },
     "com.unity.burst": {
       "version": "1.8.27",
       "depth": 2,
@@ -112,6 +125,27 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.postprocessing": {
+      "version": "3.5.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.physics": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.probuilder": {
+      "version": "6.0.9",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.shadergraph": "17.0.3",
+        "com.unity.modules.imgui": "1.0.0",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.settings-manager": "1.0.3"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.render-pipelines.core": {
       "version": "17.3.0",
       "depth": 1,
@@ -153,7 +187,7 @@
     },
     "com.unity.settings-manager": {
       "version": "2.1.1",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"

@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Main Terrain
+  m_Shader: {fileID: 4800000, guid: 42ac72323c7ac8548b9e927dcdd8fbb1, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _DETAIL_NORMALS_ON
+  - _GEOLOGICAL_ON
+  - _HEIGHT_BLEND_ON
+  - _MACRO_VARIATION_ON
+  - _RAIN_ON
+  - _SNOW_ON
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlbedoArray:
+        m_Texture: {fileID: 18700000, guid: 69130434f62a7714889af7c4a4be5fef, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColormapNormalTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColormapTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Control:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Control0:
+        m_Texture: {fileID: 2800000, guid: 5fbc169d87b5e5e47b4da3d4f5a5b4a7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Control1:
+        m_Texture: {fileID: 2800000, guid: 7b5db347d93b8c74bad542810e32efbc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormal:
+        m_Texture: {fileID: 2800000, guid: c326498166bbf1844a78583635d7c7b1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GeoMap:
+        m_Texture: {fileID: 2800000, guid: f9075c00c5151c745993f860319e0d31, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GeoNormal:
+        m_Texture: {fileID: 2800000, guid: 61cb82265aec23f4b91e840cb70a5636, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MacroVariationMap:
+        m_Texture: {fileID: 2800000, guid: 2f6179c152f56b048958dd7dc649cb41, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalArray:
+        m_Texture: {fileID: 18700000, guid: 228a352973e6b80449de85932e6c6596, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SplatmapIndex:
+        m_Texture: {fileID: 2800000, guid: d1b25998ec67daf4e8841048657adb55, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SplatmapIndexLowRes:
+        m_Texture: {fileID: 2800000, guid: 04931411b39a8714b885381365e05a0b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TerrainHolesTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WorldNormalMap:
+        m_Texture: {fileID: 2800000, guid: 7e0eccbb469649a47b15118ef50ff389, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BlendFactor: 0.7648
+    - _COLORMAP: 0
+    - _DETAIL_NORMALS: 1
+    - _EnableHeightBlend: 0
+    - _EnableInstancedPerPixelNormal: 1
+    - _GEOLOGICAL: 1
+    - _HEIGHT_BLEND: 1
+    - _HeightTransition: 0
+    - _MACRO_VARIATION_ON: 0
+    - _MOBILE_VR_ON: 0
+    - _NumLayersCount: 1
+    - _RAIN: 1
+    - _Resolution: 2049
+    - _SNOW: 1
+    - _TESSELLATION: 0
+    - _TessellationMultiplier: 1
+    - _WorldAlignedUVs: 1
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ColormapDataA: {r: 1, g: 10, b: 1, a: 1}
+    - _ColormapNearFarData: {r: 1, g: 1, b: 1, a: 1}
+    - _DetailNearFarData: {r: 100, g: 0.42, b: 1000, a: 2}
+    - _GeoFarData: {r: 1, g: 409, b: 0.334, a: 0}
+    - _GeoLayerData0: {r: 1, g: 1, b: 1, a: 1}
+    - _GeoLayerData1: {r: 1, g: 1, b: 1, a: 1}
+    - _GeoNearData: {r: 1, g: 73.4, b: 1, a: 0}
+    - _GlobalBlendData: {r: 0.00001, g: 1, b: 0, a: 0}
+    - _MacroVariationData: {r: 0.00313, g: 0.000593, b: 0.000078000005, a: 0.627}
+    - _ObjectSpaceDataA: {r: 0, g: 0, b: 0, a: 0}
+    - _TerrainHeightmapRecipSize: {r: 0.00048804295, g: 0.00048804295, b: 0.00048828125, a: 0.00048828125}
+    - _TerrainPosSize: {r: -500, g: -500, b: 1000, a: 1000}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

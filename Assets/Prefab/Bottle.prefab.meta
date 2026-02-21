@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: ef79f7819a5e21548a7a377d49888e38
+<<<<<<<< HEAD:Assets/Prefab/Bottle.prefab.meta
+guid: 0b6afa3d7c657574ca3f15d67be2a663
+========
+guid: 00a5705dcbe05f4479049c7a3cc08214
+>>>>>>>> map+environment:Assets/Button.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
