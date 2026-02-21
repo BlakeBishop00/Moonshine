@@ -16,7 +16,7 @@ public class ObjectMovement : MonoBehaviour
     [Tooltip("copies rotate AND position")]
     public Transform moveToTransform; // will copy rotate and position
     [Tooltip("if you save the new transform to a gameobject attached to the object that is moving")]
-    public bool ignoreLocal = true;
+    public bool ignoreLocal = false;
     [Tooltip("if you want it to move position")]
     public bool positionCopy = true;
     [Tooltip("if you want it to rotate")]
@@ -184,16 +184,10 @@ public class ObjectMovement : MonoBehaviour
 
         if (!reset)
         {
-            if (resetOnTriggerFalse && triggeredByButton && button != null)
-            {
-                if (!button.triggered && hasBeenPressedOnce) // has been pressed once should be fine, does this if it's already been started before
-                {
-                    InstantReset();
-                }
-            }
-
             if (moving)
             {
+                // no instant reset it's fucking glitched
+
                 if (scaleCopy && !scaled)
                 {
                     if (!scaleLast)
@@ -304,26 +298,89 @@ public class ObjectMovement : MonoBehaviour
 
                 if ((moved || !positionCopy) && (!rotateCopy || rotated) && (!scaleCopy || scaled))
                 {
-                    moving = false;
+
 
                     if (resets)
                     {
                         if (resetDelay > 0)
                         {
-                            Invoke("ResetDelayed", resetDelay);
+                            if (resetOnTriggerFalse)
+                            {
+                                if (!button.triggered)
+                                {
+                                    Invoke("ResetDelayed", resetDelay);
+                                    moving = false;
+                                    moved = false;
+                                    rotated = false;
+                                    scaled = false;
+
+                                    if (triggerAnotherOnFinish && !finishAfterReset)
+                                    {
+                                        next.CallMove();
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                Invoke("ResetDelayed", resetDelay);
+                                moving = false;
+                                moved = false;
+                                rotated = false;
+                                scaled = false;
+
+                                if (triggerAnotherOnFinish && !finishAfterReset)
+                                {
+                                    next.CallMove();
+                                }
+                            }
                         }
                         else
-                            reset = true;
-                    }
+                        {
+                            if (resetOnTriggerFalse)
+                            {
+                                if (!button.triggered)
+                                {
+                                    reset = true;
+                                    moving = false;
+                                    moved = false;
+                                    rotated = false;
+                                    scaled = false;
 
-                    if (triggerAnotherOnFinish && !finishAfterReset)
+                                    if (triggerAnotherOnFinish && !finishAfterReset)
+                                    {
+                                        next.CallMove();
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                reset = true;
+                                moving = false;
+                                moved = false;
+                                rotated = false;
+                                scaled = false;
+
+                                if (triggerAnotherOnFinish && !finishAfterReset)
+                                {
+                                    next.CallMove();
+                                }
+                            }
+                        }
+                    }
+                    else
                     {
-                        next.CallMove();
+                        moving = false;
+                        moved = false;
+                        rotated = false;
+                        scaled = false;
+                        
+                    if (triggerAnotherOnFinish && !finishAfterReset)
+                        {
+                            next.CallMove();
+                        }
                     }
-
-                    moved = false;
-                    rotated = false;
-                    scaled = false;
                 }
 
             }
@@ -346,6 +403,18 @@ public class ObjectMovement : MonoBehaviour
         }
         else
         {
+            if (triggeredByButton)
+            {
+                if (button != null)
+                {
+                    if (button.triggeredByEnter && button.triggered)
+                    {
+                        return;
+                        // don't reset yet
+                    }
+                }
+            }
+
             if (scaleCopy && !scaled)
             {
                 if (!resetscaleLast)
@@ -473,6 +542,31 @@ public class ObjectMovement : MonoBehaviour
                                 moved = true;
                         }
                     }
+                }
+            }
+
+            // reset glitched bullshit
+            // if it still doesn't work change snap amount
+
+            if (rotateCopy)
+            {
+                if (Quaternion.Angle(transform.rotation, savedBackTransformRotation) < snapAmount)
+                {
+                    rotated = true;
+                }
+            }
+            if (positionCopy)
+            {
+                if (Vector3.Distance(transform.position, savedBackTransformPosition) < snapAmount)
+                {
+                    moved = true;
+                }
+            }
+            if (scaleCopy)
+            {
+                if (Vector3.Distance(transform.localScale, savedBackTransformScale) < snapAmount)
+                {
+                    scaled = true;
                 }
             }
 

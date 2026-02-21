@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class GameButton : MonoBehaviour // Renamed some assets had script with same name
 {
     public bool triggeredByEnter = false;
+    public bool exitTurnOffTrigger = true; // renamed to update all objects using this auto
 
     public string triggerTag = "Player";
     InputAction action;
@@ -43,13 +44,12 @@ public class GameButton : MonoBehaviour // Renamed some assets had script with s
     {
         if (!triggered && inside)
         {
-            if (action != null && action.IsPressed())
-            {
-                triggered = true;
-                if (resets)
-                {
+            triggered = true;
+
+            if (resets && !exitTurnOffTrigger && action != null && action.IsPressed())
+            { 
                     Invoke("ResetTrigger", Mathf.Max(resetTimer, 0.02f)); // I don't think invoke is the best? I don't really care it should be fine
-                }
+                
             }
         }
     }
@@ -58,9 +58,10 @@ public class GameButton : MonoBehaviour // Renamed some assets had script with s
     {
         if (other.tag == triggerTag)
         {
+
+                inside = true;
             if (!triggeredByEnter)
             {
-                inside = true;
                 if (playerUIManager != null)
                 {
                     playerUIManager.ShowUseButtonTooltip();
@@ -70,10 +71,7 @@ public class GameButton : MonoBehaviour // Renamed some assets had script with s
                     other.gameObject.GetComponent<PlayerUIManage>().ShowUseButtonTooltip();
                 }
             }
-            else
-            {
-                triggered = true;
-            }
+
         }
     }
 
@@ -83,9 +81,9 @@ public class GameButton : MonoBehaviour // Renamed some assets had script with s
 
         if (other.tag == triggerTag)
         {
+            inside = false;
             if (!triggeredByEnter)
             {
-                inside = false;
                 if (removeTextInstantly)
                 {
                     if (playerUIManager != null)
@@ -98,10 +96,10 @@ public class GameButton : MonoBehaviour // Renamed some assets had script with s
                     }
                 }
             }
-            else
-            {
-                triggered = false; // reset by default
-            }
+
+            if (exitTurnOffTrigger) // wait time because iosjfguiosdfgsdfguioaweiofsdjfg
+                Invoke("ResetTrigger", Mathf.Max(resetTimer, 0.02f)); // I don't think invoke is the best? I don't really care it should be fine
+
         }
 
     }
