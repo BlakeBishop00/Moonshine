@@ -4,6 +4,7 @@ public class AICharacterBase : MonoBehaviour, IInspectable, IInteractable
 {
     [SerializeField] private float _baseSellValue = 1000f;
     [SerializeField] private float _ageMultiplier = 0.2f;
+    [SerializeField] private float _distanceScale = 0.1f;
     private IngredientData _preferredMixture;
 
     void Start()
@@ -27,7 +28,8 @@ public class AICharacterBase : MonoBehaviour, IInspectable, IInteractable
         float distance = Mathf.Sqrt(x1 + x2 + x3 + x4 + x5);
 
         float ageFactor = 1f + (ageLevel * _ageMultiplier);
-        return (int)(_baseSellValue * (1f / (distance + 1f)) * ageFactor);
+        int sellValue = (int)(_baseSellValue * (1f / (distance * _distanceScale + 1f)) * ageFactor);
+        return sellValue;
     }
 
     public IngredientData GetStats()

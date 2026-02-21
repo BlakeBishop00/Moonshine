@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0475c5f3389f1bc47a16ebe48f22dcc6, type: 3}
+  m_Name: Apple
+  m_EditorClassIdentifier: Assembly-CSharp::ShopItem
+  ItemPrefab: {fileID: 1431815165407596779, guid: 1535ead865830c74d9b0b3c085b14f34, type: 3}
+  Icon: {fileID: 2800000, guid: 116085dda5f0bbc4e9112fbd45832302, type: 3}
+  ItemName: Apple
+  Description: 'A sweetness with a gentle tart edge, giving your brew a lively start
+    and smooth finish '
+  Cost: 13

@@ -103,7 +103,9 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IWatera
             }
             _waterLevel -= 1;
             UpdateWater();
-        } else
+        } 
+        
+        if (_waterLevel <= 0)
         {
             ResetPot();
         }
