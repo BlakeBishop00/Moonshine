@@ -6,6 +6,13 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "com.sr4dev.unity-spriteassist": {
+      "version": "https://github.com/sr4dev/Unity-SpriteAssist.git?path=Assets/SpriteAssist",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a138d068de90346d8a557aff9ab738377c8b81d3"
+    },
     "com.unity.burst": {
       "version": "1.8.27",
       "depth": 2,

@@ -19,7 +19,6 @@ public class BillboardSpriteManage : MonoBehaviour
     int lastIndex = -1;
     bool lastFlip;
 
-
     void Awake()
     {
         meshSprite = GetComponent<MeshSpriteRenderer>();
@@ -110,11 +109,8 @@ public class BillboardSpriteManage : MonoBehaviour
     {
         if (rotate)
         {
-            if (mainCamera == null) return;
-
             Vector3 cameraDirection = mainCamera.transform.forward;
             cameraDirection.y = 0f;
-
             transform.rotation = Quaternion.LookRotation(cameraDirection, Vector3.up);
         }
     }
