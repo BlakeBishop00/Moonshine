@@ -48,6 +48,7 @@ public class PhysicsPickup : MonoBehaviour
         _colliders.ForEach(c => c.enabled = true);
         OnDrop.Invoke(_heldObject);
         _heldObject = null;
+        FMODUnity.RuntimeManager.PlayOneShot("event:/player/actions/ItemPlace");
     }
 
     public Rigidbody GetHeldObject() => _heldObject;
@@ -94,6 +95,7 @@ public class PhysicsPickup : MonoBehaviour
 
         _colliders = _heldObject.GetComponentsInChildren<Collider>().ToList();
         _colliders.ForEach(c => c.enabled = false);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/player/actions/ItemPickup");
 
         return true;
     }

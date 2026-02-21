@@ -40,6 +40,7 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IIntera
         _currentMixture.BitterValue += ingredient.BitterValue;
         _currentMixture.SaltyValue += ingredient.SaltyValue;
         _currentMixture.UmamiValue += ingredient.UmamiValue;
+        FMODUnity.RuntimeManager.PlayOneShot("event:/player/actions/AddIngredient");
     }
 
     public void TickAge()

@@ -180,6 +180,7 @@ public class PlayerMovement : MonoBehaviour
         allowJump = false;
         velocity.y = jumpForce;
         Invoke("PauseBeforeCheckingGroundAgain", pauseGroundChecksTime);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/player/movement/Jump");
     }
 
     void PauseBeforeCheckingGroundAgain()
