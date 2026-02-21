@@ -175,7 +175,7 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 1
     - _AlphaToMask: 0
-    - _Amount: 0.4
+    - _Amount: 0.62
     - _BAKERY_BICUBIC: 0
     - _BAKERY_LMSPEC: 0
     - _BAKERY_SHNONLINEAR: 1
@@ -188,7 +188,7 @@ Material:
     - _Blend: 1
     - _BlendModePreserveSpecular: 1
     - _BlendOp: 0
-    - _Brightness: 20.88
+    - _Brightness: 6
     - _Brightness_Scale: 1
     - _BumpScale: 1
     - _CastShadows: 1
@@ -244,7 +244,7 @@ Material:
     - _Randomize_Brightness_Down: 0
     - _Randomize_Brightness_Up: 0
     - _ReceiveShadows: 1
-    - _Scale: 99970.87
+    - _Scale: 999
     - _Scale_Multiplier: 2000
     - _Scale_Size: 1
     - _Seed: 23
