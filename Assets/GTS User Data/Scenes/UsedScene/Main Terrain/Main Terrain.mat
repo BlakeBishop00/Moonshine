@@ -111,7 +111,7 @@ Material:
     - _SNOW: 1
     - _TESSELLATION: 0
     - _TessellationMultiplier: 1
-    - _WorldAlignedUVs: 1
+    - _WorldAlignedUVs: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _ColormapDataA: {r: 1, g: 10, b: 1, a: 1}
@@ -125,6 +125,6 @@ Material:
     - _MacroVariationData: {r: 0.00313, g: 0.000593, b: 0.000078000005, a: 0.627}
     - _ObjectSpaceDataA: {r: 0, g: 0, b: 0, a: 0}
     - _TerrainHeightmapRecipSize: {r: 0.00048804295, g: 0.00048804295, b: 0.00048828125, a: 0.00048828125}
-    - _TerrainPosSize: {r: -500, g: -500, b: 1000, a: 1000}
+    - _TerrainPosSize: {r: -500, g: -500, b: 999, a: 999}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
