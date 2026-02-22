@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class PhysicsPickup : MonoBehaviour
 {
+    public ObjectManager OBBYBOBBY;
+
     [HideInInspector] public UnityEvent<Rigidbody> OnPickup;
     [HideInInspector] public UnityEvent<Rigidbody> OnDrop;
 
@@ -97,7 +99,14 @@ public class PhysicsPickup : MonoBehaviour
 
         _colliders = _heldObject.GetComponents<Collider>().ToList();
         _colliders.ForEach(c => c.enabled = false);
-        if (hit.collider.gameObject.tag == rotateTag)
+        myCurrentObjectID = -1;
+        GameObject obj = hit.collider.gameObject;
+        PropIndexHolder PROBJ = obj.GetComponent<PropIndexHolder>();
+        if (PROBJ != null)
+        {
+            myCurrentObjectID = PROBJ.myIndex;
+        }
+        if (obj.tag == rotateTag)
         {
             myCurrentObjectIsARotateObject = true; // good coding
         }
@@ -124,9 +133,21 @@ public class PhysicsPickup : MonoBehaviour
     }
 
     bool myCurrentObjectIsARotateObject; //good name
+    int myCurrentObjectID; // good name
+    
 
     void MoveObject()
     {
+        if(myCurrentObjectID == -1)
+        {
+            PropIndexHolder PROBBY = _heldObject.gameObject.GetComponent<PropIndexHolder>();
+
+            if (PROBBY)
+            {
+                myCurrentObjectID = PROBBY.myIndex;
+            }
+        }
+
         Vector3 holdPosition = _playerCamera.transform.position + _playerCamera.transform.forward * _holdDistance;
 
         Vector3 direction = holdPosition - _heldObject.position;
@@ -140,6 +161,10 @@ public class PhysicsPickup : MonoBehaviour
         }
         Quaternion newRotation = Quaternion.Slerp(_heldObject.rotation, targetRotation, _rotateSpeed * Time.fixedDeltaTime);
         _heldObject.MoveRotation(newRotation);
+
+        if (myCurrentObjectID >= 0) {
+            OBBYBOBBY.UpdateObjectPosition(myCurrentObjectID, _heldObject.position);
+        }
     }
 
     void ThrowObject()

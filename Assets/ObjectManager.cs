@@ -20,15 +20,22 @@ public class ObjectManager : MonoBehaviour
     {
         int total = objectsToCull.Length;
         int processed = 0;
-        const int batchSize = 200;
+        const int batchSize = 100;
 
         for (int i = 0; i < total; i++)
         {
             var obj = objectsToCull[i];
             if (obj == null) continue;
 
+            var holder = obj.GetComponent<PropIndexHolder>();
+            if (holder == null)
+            {
+                holder = obj.AddComponent<PropIndexHolder>();
+            }
+
             spheres[activeSphereCount] = new BoundingSphere(obj.transform.position, sphereRadius);
             objectIndices[activeSphereCount] = i;
+            holder.myIndex = i;
             originalToSphereIndex[i] = activeSphereCount;
             activeSphereCount++;
 
