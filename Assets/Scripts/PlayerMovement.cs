@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     public float airAccelTime = 0.5f;
 
     public float airFriction = 0.5f;
+    [Header("Jumping")]
+    public float jumpForce = 8f;
 
     [Header("Mouse Look")]
     public float mouseSensitivity = 2f;
@@ -32,7 +34,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Ground Check")]
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
+    public float groundCollideDist = 0.1f;
+    public float allowJumpDist = 0.1f;
     public LayerMask groundMask;
 
     // New Input System
@@ -72,6 +75,8 @@ public class PlayerMovement : MonoBehaviour
         inputActions.Player.Look.performed += ctx => lookInput = ctx.ReadValue<Vector2>();
         inputActions.Player.Look.canceled += ctx => lookInput = Vector2.zero;
 
+        inputActions.Player.Jump.performed += ctx => DoJump();
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -87,7 +92,14 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        // send to rigid body and we shouldn't need two checks.
+        // Rigid body is probably better too because you can send objects flying around, I don't think you can with char controller
+
+        // allowJump because isGrounded will make them stop that much distance above the ground
+        allowJump = Physics.CheckSphere(groundCheck.position, allowJumpDist, groundMask);
+        // the legit floor colliding distance
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundCollideDist, groundMask);
+        
 
         Vector2 lookDelta = lookInput * mouseSensitivity;
 
@@ -108,6 +120,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded)
         {
+            if (velocity.y != 0 && !iReallyWantJump) // use I want jump to not reset the player's velocity to 0 if they're trying to jump
+            {
+                velocity.y = 0;
+            }
+
             horizVel = ApplyFriction(horizVel, groundFriction);
 
             if (hasInput)
@@ -117,6 +134,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            velocity.y += gravity * Time.deltaTime;
+
             horizVel = ApplyFriction(horizVel, airFriction);
 
             if (hasInput)
@@ -128,18 +147,6 @@ public class PlayerMovement : MonoBehaviour
         velocity.x = horizVel.x;
         velocity.z = horizVel.z;
 
-        if (!isGrounded)
-        {
-            velocity.y += gravity * Time.deltaTime;
-        }
-        else
-        {
-            if(velocity.y != 0f)
-            {
-                velocity.y = 0;
-            }
-        }
-
         if (horizVel.sqrMagnitude < 0.0001f)
         {
             velocity.x = 0f;
@@ -147,8 +154,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         controller.Move(velocity * Time.deltaTime);
-
-        
 
         Vector3 pos = transform.position;
 
@@ -160,7 +165,30 @@ public class PlayerMovement : MonoBehaviour
         }
 
         transform.position = pos;
-        
+    }
+
+    bool allowJump;
+    bool iReallyWantJump;
+    public float pauseGroundChecksTime = 0.05f;
+
+    private void DoJump()
+    {
+        if (!allowJump)
+            return;
+
+        iReallyWantJump = true;
+        allowJump = false;
+        velocity.y = jumpForce;
+        Invoke("PauseBeforeCheckingGroundAgain", pauseGroundChecksTime);
+    }
+
+    void PauseBeforeCheckingGroundAgain()
+    {
+        // not the best way to do this but it will just stop doing grounded checks momentarily to allow the player to get off the ground,
+        // since I've made it reset the player's velocity if they hit the ground (before it would keep their velocity, and they would have something like -1000 velocity even when on the ground)
+
+        iReallyWantJump = false;
+
     }
 
     private Vector3 ApplyFriction(Vector3 vel, float friction)
@@ -182,15 +210,4 @@ public class PlayerMovement : MonoBehaviour
         float accelSpeed = Mathf.Min(accel * Time.deltaTime, addSpeed);
         return vel + accelSpeed * wishDir;
     }
-
-#if UNITY_EDITOR
-    void OnDrawGizmosSelected()
-    {
-        if (groundCheck != null)
-        {
-            Gizmos.color = isGrounded ? Color.green : Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
-        }
-    }
-#endif
 }
