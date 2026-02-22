@@ -13,7 +13,7 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IWatera
 
     private StationBase _currentStation;
     private IngredientData _currentMixture;
-    private Renderer _liquidRenderer;
+    public Renderer _liquidRenderer;
     private int _waterLevel = 0;
     private int _ageLevel = 0;
     private List<IngredientBase> _attachedIngredients = new List<IngredientBase>();
@@ -21,8 +21,6 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IWatera
 
     void Awake()
     {
-        _liquidRenderer = _liquidVisual.GetComponent<Renderer>();
-
         ResetPot();
     }
 

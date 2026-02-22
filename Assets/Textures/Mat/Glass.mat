@@ -143,7 +143,7 @@ Material:
     - _Surface: 0
     - _TriplanarNormalStrength: 1
     - _TriplanarSpace: 0
-    - _TriplanarUVScale: 1
+    - _TriplanarUVScale: 2
     - _UseGlobalNormal: 0
     - _UseMaskMap: 0
     - _WorkflowMode: 1

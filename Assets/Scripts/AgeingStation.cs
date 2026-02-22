@@ -31,12 +31,12 @@ public class AgeingStation : StationBase
 
         OnStationActivate.AddListener(() =>
         {
-            _ageingEffectRenderer.material.color = Color.yellow;
+            _ageingEffectRenderer.enabled = true;
         });
 
         OnStationDeactivate.AddListener(() =>
         {
-            _ageingEffectRenderer.material.color = Color.gray;
+            _ageingEffectRenderer.enabled = false;
         });
     }
 }
