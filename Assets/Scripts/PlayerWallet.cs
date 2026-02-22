@@ -26,6 +26,7 @@ public class PlayerWallet : MonoBehaviour
         _currentBalance += amount;
         OnBalanceChanged?.Invoke(_currentBalance);
         PlayerPrefs.SetInt("PlayerBalance", _currentBalance);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/NotAffectedByReverb/UI/Sell");
         return true;
     }
 

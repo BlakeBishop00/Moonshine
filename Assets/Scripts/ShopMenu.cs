@@ -92,6 +92,7 @@ public class ShopMenu : MonoBehaviour
         if (PlayerController.Instance.PlayerWallet.Withdraw(_currentShopItem.Cost))
         {
             Instantiate(_currentShopItem.ItemPrefab, _itemSpawnPoint, Quaternion.identity);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/NotAffectedByReverb/UI/Buy");
         }
         else
         {

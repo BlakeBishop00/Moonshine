@@ -103,6 +103,7 @@ public class PhysicsPickup : MonoBehaviour
         GameObject obj = hit.collider.gameObject;
         PropIndexHolder PROBJ = obj.GetComponent<PropIndexHolder>();
         if (PROBJ != null)
+            FMODUnity.RuntimeManager.PlayOneShot("event:/AffectedByReverb/actions/ItemPickup");
         {
             myCurrentObjectID = PROBJ.myIndex;
         }
@@ -174,5 +175,6 @@ public class PhysicsPickup : MonoBehaviour
         _heldObject.AddForce(_playerCamera.transform.forward * _throwForce, ForceMode.Impulse);
         _colliders.ForEach(c => c.enabled = true);
         _heldObject = null;
+        FMODUnity.RuntimeManager.PlayOneShot("event:/AffectedByReverb/actions/ItemPlace");
     }
 }

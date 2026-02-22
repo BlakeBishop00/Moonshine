@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="EventFolder" id="{5637eea8-fa9d-4a0f-befd-280b41450a5d}">
+		<property name="name">
+			<value>AffectedByReverb</value>
+		</property>
+		<relationship name="folder">
+			<destination>{e9b61d96-758c-4b06-bb62-39a6f5285ea7}</destination>
+		</relationship>
+	</object>
+</objects>

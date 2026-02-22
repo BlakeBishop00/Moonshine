@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{6ccca676-e300-46c9-881d-444fab5fdb00}">
+		<property name="assetPath">
+			<value>mx_moonshine_m1_70bpm-4-4.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>61.714291666666668</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{858a5c0d-1c3b-4591-9c43-dce5dd42be58}</destination>
+		</relationship>
+	</object>
+</objects>

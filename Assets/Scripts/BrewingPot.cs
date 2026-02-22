@@ -65,6 +65,7 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IWatera
 
         _currentMixture += ingredient;
         UpdateWater();
+        FMODUnity.RuntimeManager.PlayOneShot("event:/AffectedByReverb/actions/AddIngredient");
     }
 
     public void TickAge()
@@ -140,6 +141,7 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IWatera
         _waterLevel = Mathf.Clamp(_waterLevel, 0, 5);
 
         UpdateWater();
+        FMODUnity.RuntimeManager.PlayOneShot("event:/AffectedByReverb/actions/AddWater");
     }
 
     public bool Interact()
@@ -194,6 +196,7 @@ public class BrewingPot : MonoBehaviour, IAgeable, IFlammable, IMixable, IWatera
 
         bottle.SetMixture(_currentMixture, _ageLevel);
         Debug.Log("Transferred mixture to bottle");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/AffectedByReverb/actions/TransferToBottle");
         return true;
     }
 

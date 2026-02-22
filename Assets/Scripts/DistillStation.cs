@@ -31,6 +31,7 @@ public class DistillStation : StationBase
         OnStationActivate.AddListener(() =>
         {
             _heatingEffectRenderer.material.color = Color.red;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/AffectedByReverb/actions/Distilling");
         });
 
         OnStationDeactivate.AddListener(() =>

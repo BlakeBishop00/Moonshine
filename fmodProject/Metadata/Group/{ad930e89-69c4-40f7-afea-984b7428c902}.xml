@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="MixerGroup" id="{ad930e89-69c4-40f7-afea-984b7428c902}">
+		<property name="volume">
+			<value>-80</value>
+		</property>
+		<property name="name">
+			<value>DungeonMusicBus</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{b647a5c9-7013-4372-aaac-43310d790a33}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{99a4bddd-015a-43e7-b95a-b0f1a3a42db7}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{a81acdde-5328-45e6-b94a-e639170f3318}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{b647a5c9-7013-4372-aaac-43310d790a33}">
+		<relationship name="effects">
+			<destination>{f71b7cef-0bae-4606-aadf-f4a734de9c86}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{99a4bddd-015a-43e7-b95a-b0f1a3a42db7}" />
+	<object class="MixerBusFader" id="{f71b7cef-0bae-4606-aadf-f4a734de9c86}" />
+</objects>
