@@ -10,6 +10,8 @@ public class PhysicsPickup : MonoBehaviour
 
     [Header("Interact Settings")]
     [SerializeField] private LayerMask _interactLayer;
+    [SerializeField] private string rotateTag;
+    [SerializeField] private Vector3 howMuchToRotateItBy;
     [Header("Pickup Settings")]
     [SerializeField] private LayerMask _pickupLayer;
     [SerializeField] private float _pickupRange = 6f;
@@ -87,6 +89,7 @@ public class PhysicsPickup : MonoBehaviour
             return false;
 
         _heldObject = rb;
+
         _originalLinearDamping = _heldObject.linearDamping;
         _heldObject.linearDamping = _linearDampening;
         _heldObject.useGravity = false;
@@ -94,7 +97,14 @@ public class PhysicsPickup : MonoBehaviour
 
         _colliders = _heldObject.GetComponents<Collider>().ToList();
         _colliders.ForEach(c => c.enabled = false);
-
+        if (hit.collider.gameObject.tag == rotateTag)
+        {
+            myCurrentObjectIsARotateObject = true; // good coding
+        }
+        else
+        {
+            myCurrentObjectIsARotateObject = false;
+        }
         return true;
     }
 
@@ -113,6 +123,8 @@ public class PhysicsPickup : MonoBehaviour
         return success;
     }
 
+    bool myCurrentObjectIsARotateObject; //good name
+
     void MoveObject()
     {
         Vector3 holdPosition = _playerCamera.transform.position + _playerCamera.transform.forward * _holdDistance;
@@ -121,7 +133,11 @@ public class PhysicsPickup : MonoBehaviour
 
         _heldObject.linearVelocity = direction * _moveForce * Time.fixedDeltaTime;
 
-        Quaternion targetRotation = Quaternion.Euler(0f, _playerCamera.transform.eulerAngles.y, 0f);
+        Quaternion targetRotation = Quaternion.Euler(0, _playerCamera.transform.eulerAngles.y, 0);
+        if (myCurrentObjectIsARotateObject)
+        {
+            targetRotation = Quaternion.Euler(targetRotation.x + howMuchToRotateItBy.x, targetRotation.y + howMuchToRotateItBy.y, targetRotation.z + howMuchToRotateItBy.z);
+        }
         Quaternion newRotation = Quaternion.Slerp(_heldObject.rotation, targetRotation, _rotateSpeed * Time.fixedDeltaTime);
         _heldObject.MoveRotation(newRotation);
     }
