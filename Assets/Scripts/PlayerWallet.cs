@@ -5,9 +5,16 @@ public class PlayerWallet : MonoBehaviour
 {
     [HideInInspector] public UnityEvent<int> OnBalanceChanged;
     private int _currentBalance;
+    public bool reset;
+    public int resetBal;
 
     void Awake()
     {
+        if (reset)
+        {
+            PlayerPrefs.SetInt("PlayerBalance", resetBal);
+        }
+
         _currentBalance = PlayerPrefs.GetInt("PlayerBalance", 0);
     }
 
